@@ -1,0 +1,200 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+  
+
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Espacios360 - Innovación en Virtual Tour 360</title>
+  <link rel="icon" type="image/png" href="favicon.png"/>
+  <link href="styles.css" rel="stylesheet"/>
+ 
+<script> 
+
+  const isMobile = navigator.userAgentData.mobile;
+
+  function initMap() {
+      var mapStyles = [
+        {
+        "featureType": "poi.attraction",
+            "elementType": "labels",
+            "stylers": [
+              { "visibility": "off" }
+            ]
+        },
+        {
+          "featureType": "poi.business",
+          "stylers": [
+            { "visibility": "off" }
+          ]
+        }        
+      ];
+      var latlng = new google.maps.LatLng(-37.340297314391755, -59.13938660978584);
+        var mapOptions = {
+          center: latlng,
+          zoom: 13,
+          styles: mapStyles
+        };
+      if (isMobile){
+        latlng = new google.maps.LatLng(-37.33875984505524, -59.14908388988246);
+        mapOptions = {
+          center: latlng,
+          zoom: 13,
+          styles: mapStyles
+        };
+      }
+      
+
+      const contentStringEpoca =
+      '<div id="content">' +
+        '<div id="siteNotice">' +
+      "</div>" +     
+      '<div id="grid">' +
+        '<div id="areaA"><img width="100%" height="209px" src="IMG_20180122_164517164_HDR.jpg"/></div>'+
+        '<div id="areaB"><p><h1>____</h1><p><h1>Epoca de Quesos</h1>' +
+          "Un lugar mágico, una obra de arte para gente sensible. Eso que llaman concepto, o más sofisticadamente una instalación, Teresa Inza, su dueña, lo logró por pura intuición y por amor a las cosas viejas. Y no tirar algo significa cuidarlo, conservar historias, el ideal de vivir en dos tiempos, el actual y uno diferente: más lento, más delicado, más verdadero, menos efímero.</p>" +
+        '<p>Visitanos, <a target="_blank" href="https://goo.gl/maps/GQjggekWKUEdvovF7">' +
+          "Epoca de Quesos</a> " +
+        "</p></div>" +
+      "</div>";
+
+      const contentStringPicapedrero =
+      '<div id="content">' +
+      '<div id="grid">' +
+        '<div id="areaA"><img width="100%" src="imagen_pica.jpg"/></div>'+
+        '<div id="areaB"><p><h1>____</h1><p><h1>Valle del Picapedrero</h1>' +
+          "El Valle del Picapedrero es un parque de aventuras en la naturaleza. Realizamos actividades de turismo aventura en las sierras de Tandil desde el año 2012. Todas nuestras actividades están a cargo de profesores de Educación Física especializados en vida en la naturaleza, guías de montaña o guías serranos."+
+          "La seguridad y la calidad de las actividades de nuestro parque de aventuras está avalada por el reconocido guía de alta montaña Alberto Del Castillo, Guía UIAGM (Unión Internacional de Asociaciones de Guías de Montaña), Guía de Alta Montaña AAGM (Asociación Argentina de Guías de montaña), profesor Nacional de Educación Física (INEF N1 Romero Brest), Instructor Nacional de Escalada FASA (Federación Argentina de Ski y Andinismo) - Instructor de Parapente FAVL (Federación Argentina de Vuelo Libre).</p>" +
+        '<p>Visitanos, <a target="_blank" href="https://g.page/valledelpicapedrero?share">' +
+          "Valle del Picapedrero</a> " +
+        "</p></div>" +
+      "</div>";
+
+      const contentStringDulceria =
+      '<div id="content">' +
+      '<div id="grid">' +
+        '<div id="areaA"><img width="100%" src="221.jpg"/></div>'+
+        '<div id="areaB"><p><h1>____</h1><p><h1>Dulcería El Cazador</h1>' +
+          "Una pequeña cabaña de troncos es el sitio donde elegimos vivir y trabajar. Aquí fabricamos, crecimos y exponemos nuestros productos dulces, acompañados de otros que caracterizan nuestra ciudad, quesos y chacinados regionales y los afamados cuchillos de acero tandilense y artesanías."+
+          "Haremos que su visita no sea una simple compra, lo invitamos a recorrer nuestro parque, a alimentar nuestras gallinas, a caminar la huerta, y a enseñarle a sus chicos los árboles frutales y a jugar en las hamacas.</p>" +
+        '<p>Visitanos, <a target="_blank" href="https://goo.gl/maps/L3T6NPnBrUfaNz3UA">' +
+          "Dulcería El Cazador</a> " +
+        "</p></div>" +
+      "</div>";    
+
+    
+
+      
+  
+      const infowindowEpoca = new google.maps.InfoWindow({
+        content: contentStringEpoca,
+      });
+
+      const infowindowPicapedrero = new google.maps.InfoWindow({
+        content: contentStringPicapedrero,
+      });
+
+      const infowindowDulceria = new google.maps.InfoWindow({
+        content: contentStringDulceria,
+      });
+
+      var map = new google.maps.Map(document.getElementById('map'), mapOptions);
+      
+      const iconBase = "https://developers.google.com/maps/documentation/javascript/examples/full/images/";
+      const icons = {
+        epoca : {
+          icon: "Marker_epoca.png",
+        },
+        picapedrero : {
+          icon: "Marker_picapedrero.png",
+        },
+        dulceria : {
+          icon: "Marker_dulceria.png",
+        }
+      };
+      const features = [
+        {
+          position: new google.maps.LatLng(-37.32719556237731, -59.14320880077441),
+          type: "epoca",
+        },
+        {
+          position: new google.maps.LatLng(-37.3602078925842, -59.15825987330912),
+          type: "picapedrero",
+        },
+        {
+          position: new google.maps.LatLng(-37.348933637033134, -59.169943406752935),
+          type: "dulceria",
+        }
+      ];
+
+      // Create markers.
+      const markerEpoca = new google.maps.Marker({
+        position: features[0].position,
+        icon: icons[features[0].type].icon,
+        map: map,
+      });
+      markerEpoca.addListener("click", () => {
+        infowindowEpoca.open({
+          anchor: markerEpoca,
+          map,
+          shouldFocus: false,
+      })});
+
+      // Create markers.
+      const markerPicapedrero = new google.maps.Marker({
+        position: features[1].position,
+        icon: icons[features[1].type].icon,
+        map: map,
+      });
+      markerPicapedrero.addListener("click", () => {
+        infowindowPicapedrero.open({
+          anchor: markerPicapedrero,
+          map,
+          shouldFocus: false,
+      })});
+
+      const markerDulceria = new google.maps.Marker({
+        position: features[2].position,
+        icon: icons[features[2].type].icon,
+        map: map,
+      });
+      markerDulceria.addListener("click", () => {
+        infowindowDulceria.open({
+          anchor: markerDulceria,
+          map,
+          shouldFocus: false,
+      })});
+     
+  }
+
+  
+
+ </script>
+<script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDNA4srJlolqrtLa4uP5_rGQkllt3awhtA&callback=initMap"></script>	
+</head>
+<body>
+
+
+  <div id="wrapper">
+
+  <!-- Hero
+  ================================================== -->
+    <section>
+      <div id="hero-section" class="landing-hero" data-stellar-background-ratio="0">
+        <div class="hero-content">
+          <div class="container">
+            <div id="map" class="map"></div>
+          </div> <!-- End container -->
+        </div> <!-- End hero-content -->
+      </div> <!-- End hero-section -->
+    </section>
+    <!-- End hero section --> 
+
+    
+
+  </div> <!-- End wrapper -->
+  
+
+</body>
+</html>
